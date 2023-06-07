@@ -7,16 +7,6 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Hello world!</h1>
-
-	<P>The time on the server is ${serverTime}.</P>
-
-	<h3>
-		<a href="empList">사원관리</a>
-	</h3>
-	<h3>
-		<a href="deptList">부서관리</a>
-	</h3>
 
 </body>
 </html>
