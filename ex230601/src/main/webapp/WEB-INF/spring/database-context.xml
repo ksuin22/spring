@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<context:property-placeholder
+		location="classpath:config/db.properties" />
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- data source connection pool -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${driver}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<!-- 디비커넥션 -->
+	<!-- HikariDataSource에 따라서 프로퍼티 다르게함 -->
+	<!-- 커넥션풀: DBCP -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+
+	<!-- my-batis SqlSessionFactory -->
+	<!-- SqlSessionFactoryBean: 쿼리를 가져가서 실행시킴 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:config/mybatis-config.xml" />
+	</bean>
+
+	<!-- Transaction Manager 설정 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<tx:annotation-driven />
+
+	<!-- ma-pper scan -->
+	<!-- my-batiss-spring: 매퍼 만들어주는 부분. 패키지이름 -->
+	<mybatis-spring:scan base-package="com.yedam.app.**.mapper" />
+
+</beans>

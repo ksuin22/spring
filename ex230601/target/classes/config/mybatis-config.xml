@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- 루트요소 -->
+<configuration>
+	<settings>
+		<!-- 카멜케이스 설정: 칼럼명을 자동으로 카멜케이스로 인식 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 입력하지 않았을때 자동 null -->
+		<setting name="jdbcTypeForNull" value="VARCHAR" />
+	</settings>
+	<typeAliases>
+		<package name="com.yedam.app" />
+		
+	</typeAliases>
+</configuration>

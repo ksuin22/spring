@@ -1,0 +1,69 @@
+<<------EMP 만들기------>>
+<mapper>
+<selectKey keyProperty="employeeId" resultType="string"
+	order="BEFORE">
+	select max(employee_id)+1 from employees
+</selectKey>
+
+insert문 시작할때 selectKey쓰는 이유: insert한 고유번호를 바로 다른곳에 쓸때.
+resultType: VO에 타입과 같음.
+셀렉트키 안쓰면 그냥 
+
+INSERT INTO EMPLOYEES(EMPLOYEE_ID,LAST_NAME,EMAIL,HIRE_DATE,JOB_ID)
+VALUES ((select max(employee_id)+1 from employees),
+'ee','ee@rd','23/02/01','IT_PROG')
+
+
+<<-----DEPT 만들기----->>
+<매퍼>
+-매퍼 패키지이름-루트context
+-매퍼자바. 매버xml 이름같아야함.
+매퍼dtd -마이바티스 매퍼이름요약하는것 
+템플릿기능?
+마이바티스 쓸떄는 *를 잘 쓰지 않는다. 
+
+-selectKey
+등록후에 등록결과를 바로 확인하고 싶을때 자주쓴다.
+시퀀스는 자주쓰지 않는다. 셀렉트 문장.
+
+-update문: <set>
+업데이트할때 한개일때, 두개일때, 세개일떄 콤마가 다름.
+>set은 콤마를 자동 삭제,수정 해준다. 
+
+
+< ppt 5장 설명>
+ 
+스프링 컨테이너:  용도에 따라서 두가지. 
+ 1.root 컨테이너: root-context.xml에서
+ 2.웹 컨테이너: servlet-context.xml 에 웹을 유지하기위한 기본셋팅이 되어있다.
+ 				
+-RequestMapping
+:세분화 시켜서 post, get...등.
+delete, putmapping은 새로운 기계, 규격에 의해 만들어짐 
+
+-요청정보 받기.
+&로 받을때는 어노테이션 안써도 됨.
+디폴트한 방식이 아닌경우> 어노테이션 방식으로 요청정보를 받는다.
+json 문자열 받을떄는 @RequestBody 필수 붙이기.
+
+
+
+<redirect / forward 비교>
+-페이지 다시 호출하는것.
+-문법) return " redirect: 경로" ;
+
+redirect : 서버가 한번 돌려준후 경로로 처리.
+forward : 서버내에서 알아서 처리됨. 경로가 숨겨짐.
+
+->기능은 같으나 클라이언트 기준으로 표시되는지 여부의 차이라고 보면된다. 
+
+
+
+
+<js>
+
+*이벤트관련
+event.target //실제 이벤트가 발생한 태그
+event.currentTarget //this와 같은 의미. 지금 해당 이벤트에 대해 동작하는 태그
+event.preventDefault(); //기본으로 등록된 이벤트 동작을 막음.
+event.stopPropagation(); //이벤트 버블링(전파) 막는다.
