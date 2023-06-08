@@ -65,13 +65,9 @@
 				let deptNo = tdList[1].textContent;
 				
 				insertDeptInfo(0,deptNo);
-				del.submit();
-								
-			})
-						
+				del.submit();								
+			})		
 		})
-		
-
 		
 		//선택삭제 버튼 기능
 		document.getElementById('checkDel').addEventListener('click',function(e) {
