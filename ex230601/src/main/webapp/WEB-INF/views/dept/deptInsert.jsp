@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head>   
 <body>
 	<form action="deptInsert" method="POST">
 		<h2>부서 등록</h2>
